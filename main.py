@@ -86,4 +86,8 @@ async def ping(interaction: discord.Interaction):
     t2 = time.perf_counter()
     await t.edit(content=f"Pong! {round(t2 - t1, 2)}ms latency")
 
+<<<<<<< HEAD
 client.run("MTAwMjg5NDA4MjAwNTI5MTA3MA.GRUUel.CfePl65PXEJ2IKKuphLs12H9cMrksQyZWInIXY")
+=======
+client.run("token")
+>>>>>>> 53a2e44610a928f858319ffb1ccb815884c4fc4d
