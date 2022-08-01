@@ -2,6 +2,7 @@ from client import Client
 from discord import app_commands
 import discord
 import aioredis
+import pathlib
 import scraper
 import difflib
 import random
@@ -12,6 +13,10 @@ redis = aioredis.from_url("redis://localhost")
 intents = discord.Intents.default()
 client = Client(intents=intents)
 run = False
+
+path = pathlib.Path(__file__).parent.absolute()
+with open(path / "token.txt") as f:
+    token = f.read()
 
 
 async def sync():
@@ -86,8 +91,4 @@ async def ping(interaction: discord.Interaction):
     t2 = time.perf_counter()
     await t.edit(content=f"Pong! {round(t2 - t1, 2)}ms latency")
 
-<<<<<<< HEAD
-client.run("MTAwMjg5NDA4MjAwNTI5MTA3MA.GRUUel.CfePl65PXEJ2IKKuphLs12H9cMrksQyZWInIXY")
-=======
-client.run("token")
->>>>>>> 53a2e44610a928f858319ffb1ccb815884c4fc4d
+client.run(token)
