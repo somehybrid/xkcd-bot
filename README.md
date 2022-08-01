@@ -1,7 +1,7 @@
 # xkcd-bot
 Yet another xkcd bot
 
-![Example screenshot](screenshots/getter.png)
+<img src="screenshots/getter.png" alt="Example screenshot" width="75"/>
 
 ## Features
 - Can fetch xkcd comics from both id and name
@@ -10,4 +10,8 @@ Yet another xkcd bot
 - Uses string matching to correct typos in the command
 - Not a fork of SolarFlame's xkcd-bot shockingly
 
-![Example screenshot](screenshots/stringmatching.png)
+<img src="screenshots/stringmatching.png" alt="Example screenshot" width="75"/>
+
+## Hosting your own instance
+To host your own instance of the bot, you will need to make a token.txt file in the same folder and 
+add your bot's token to the file.
