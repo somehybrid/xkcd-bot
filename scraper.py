@@ -1,16 +1,35 @@
+"""
+This module defines functions used to scrape the xkcd API.
+"""
 import asyncio
-import aiohttp
 import json
+import aiohttp
 
 
 async def cscrape(session, i, redis):
+    """
+    Scrape the xkcd API for a comic and put it in the redis database.
+    """
     async with session.get(f"https://xkcd.com/{i}/info.0.json") as response:
         item = await response.json()
-        await redis.set(item["title"].lower(), json.dumps({"img": item["img"], "alt": item["alt"],
-                                                           "title": item["title"]}))
-        await redis.set(item["num"], json.dumps({"img": item["img"], "alt": item["alt"], "title": item["title"]}))
+        await redis.set(
+            item["title"].lower(),
+            json.dumps(
+                {"img": item["img"], "alt": item["alt"], "title": item["title"]}
+            ),
+        )
+        await redis.set(
+            item["num"],
+            json.dumps(
+                {"img": item["img"], "alt": item["alt"], "title": item["title"]}
+            ),
+        )
+
 
 async def xkcd_scraper(redis):
+    """
+    Scrape the xkcd API for every comic and put them in the redis database.
+    """
     tasks = []
     if not await redis.exists("standards"):
         async with aiohttp.ClientSession() as session:
