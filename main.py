@@ -6,8 +6,10 @@ import difflib
 import random
 import json
 import time
+from discord.ext import tasks
 from discord import app_commands
 import discord
+import aiohttp
 import aioredis
 from client import Client
 import scraper
@@ -19,6 +21,20 @@ client = Client(intents=intents)
 path = pathlib.Path(__file__).parent.absolute()
 with open(path / "token.txt", encoding="utf-8") as f:
     token = f.read()
+
+
+@tasks.loop(hours=3)
+async def xkcd_checker():
+    """
+    Check the xkcd API for new comics and add them to the redis database.
+    """
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://xkcd.com/info.0.json") as response:
+            item = await response.json()
+            current = item["num"]
+        for i in range(await redis.get("current"), current):
+            if i != 404:
+                await scraper.cscrape(session, i, redis)
 
 
 @client.event
