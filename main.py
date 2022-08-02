@@ -23,7 +23,7 @@ with open(path / "token.txt", encoding="utf-8") as f:
     token = f.read()
 
 
-@tasks.loop(hours=3)
+@tasks.loop(hours=2)
 async def xkcd_checker():
     """
     Check the xkcd API for new comics and add them to the redis database.
@@ -32,9 +32,10 @@ async def xkcd_checker():
         async with session.get("https://xkcd.com/info.0.json") as response:
             item = await response.json()
             current = item["num"]
-        for i in range(await redis.get("current"), current):
+        for i in range(int(await redis.get("current")), current + 1):
             if i != 404:
                 await scraper.cscrape(session, i, redis)
+                await redis.set("current", current)
 
 
 @client.event
@@ -52,6 +53,7 @@ async def on_ready():
     print("------")
     await scraper.xkcd_scraper(redis)
     print(len(client.guilds))
+    xkcd_checker.start()
 
 
 @client.tree.command(name="xkcd", description="Get an xkcd comic")
@@ -90,9 +92,10 @@ async def main(interaction: discord.Interaction, inp: str = None):
                 ratio = difflib.SequenceMatcher(
                     a=key.decode("utf-8"), b=inp.lower()
                 ).ratio()
-                if ratio > 0.75:
+                if ratio > 0.8:
                     if ratio > curmax[1]:
                         curmax = [key, ratio]
+                        break
             if curmax[1] == 0:
                 embed = discord.Embed(
                     title="Error", description="Comic not found", color=0xFF0000
