@@ -12,10 +12,10 @@ Yet another xkcd bot
 
 ## Reviews
 "My bot has slash commands too"
-\- (SolarFlame5)[https://github.com/SolarFlame5/]
+\- [SolarFlame](https://github.com/SolarFlame5/)
 
 "11/10, not owned by SolarFlame"
-\- (Local Grass Toucher)[https://neppkun.me/]
+\- [Local Grass Toucher](https://neppkun.me/)
 
 <img src="screenshots/stringmatching.png" alt="Example screenshot" width="200"/>
 
