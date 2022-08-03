@@ -11,7 +11,7 @@ Yet another xkcd bot
 - Not a fork of SolarFlame's xkcd-bot shockingly
 
 ## Reviews
-"My bot has slash commands too"
+"Mine also uses slash commands"
 \- [SolarFlame](https://github.com/SolarFlame5/)
 
 "11/10, not owned by SolarFlame"
