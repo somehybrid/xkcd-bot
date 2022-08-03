@@ -11,6 +11,9 @@ Yet another xkcd bot
 - Not a fork of SolarFlame's xkcd-bot shockingly
 
 ## Reviews
+"Mine also uses slash commands"
+\- [SolarFlame](https://github.com/SolarFlame5/)
+
 "Imitation is the sincerest form of flattery."
 \- [SolarFlame](https://github.com/SolarFlame5/)
 
