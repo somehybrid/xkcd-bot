@@ -14,6 +14,9 @@ Yet another xkcd bot
 "Mine also uses slash commands"
 \- [SolarFlame](https://github.com/SolarFlame5/)
 
+"Imitation is the sincerest form of flattery."
+\- [SolarFlame](https://github.com/SolarFlame5/) <small><sup><sub>solarflame again idk why he keeps adding reviews kinda creepy imo</sub></sup></small>
+
 "11/10, not owned by SolarFlame"
 \- [Local Grass Toucher](https://neppkun.me/)
 
