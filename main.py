@@ -2,10 +2,10 @@
 A discord bot used to get xkcd comics
 """
 import pathlib
-import difflib
 import random
 import json
 import time
+import Levenshtein as lev
 from discord.ext import tasks
 from discord import app_commands
 import discord
@@ -89,9 +89,8 @@ async def main(interaction: discord.Interaction, inp: str = None):
             curmax = ["", 0]
             keys = await redis.keys()
             for key in keys:
-                ratio = difflib.SequenceMatcher(
-                    a=key.decode("utf-8"), b=inp.lower()
-                ).ratio()
+                key = key.decode('utf-8')
+                ratio = lev.ratio(key, inp)
                 if ratio > 0.8:
                     if ratio > curmax[1]:
                         curmax = [key, ratio]
@@ -103,6 +102,7 @@ async def main(interaction: discord.Interaction, inp: str = None):
                 await interaction.followup.send(embed=embed, ephemeral=False)
                 return
             item = json.loads(await redis.get(curmax[0]))
+            item["title"] = curmax[0]
         else:
             item = json.loads(item)
 
