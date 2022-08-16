@@ -5,6 +5,7 @@ import pathlib
 import random
 import json
 import time
+import re
 import Levenshtein as lev
 from discord.ext import tasks
 from discord import app_commands
@@ -22,6 +23,11 @@ path = pathlib.Path(__file__).parent.absolute()
 with open(path / "token.txt", encoding="utf-8") as f:
     token = f.read()
 
+def title(s):
+    return re.sub(
+        r"[A-Za-z]+('[A-Za-z]+)?",
+        lambda word: word.group(0).capitalize(),
+        s)
 
 @tasks.loop(hours=2)
 async def xkcd_checker():
@@ -107,7 +113,7 @@ async def main(interaction: discord.Interaction, inp: str = None):
             item = json.loads(item)
 
     embed = discord.Embed(
-        title=item["title"],
+        title=title(item["title"]),
         url=item["img"],
         description=item["alt"],
         colour=discord.Colour.from_rgb(150, 168, 200),
